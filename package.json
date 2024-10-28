@@ -1,6 +1,6 @@
 {
-  "name": "knex-aurora-data-api-client",
-  "version": "1.10.0",
+  "name": "@shelf/knex-aurora-data-api-client",
+  "version": "2.0.0",
   "description": "Knex Aurora Data API Client",
   "main": "index.js",
   "files": [
@@ -34,7 +34,7 @@
   "homepage": "https://github.com/markusahlstrand/knex-data-api-client#readme",
   "dependencies": {
     "bluebird": "3.7.2",
-    "data-api-client": "1.2.0"
+    "data-api-client": "2.0.0-beta.0"
   },
   "peerDependencies": {
     "knex": "^2.1.0"
