@@ -107,6 +107,10 @@ describe('data-api-postgres', () => {
       await commonTests.insertTextArray(postgres);
     });
 
+    it('should insert a varchar array value', async () => {
+      await commonTests.insertVarcharArray(postgres);
+    });
+
     it('should insert a row and return an array of rows', async () => {
       await commonTests.insertRowAndReturnAnArrayOfRows(postgres);
     });

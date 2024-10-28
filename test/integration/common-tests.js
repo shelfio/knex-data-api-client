@@ -502,6 +502,22 @@ async function insertTextArray(knex) {
   expect(row.value).to.deep.equal(['test']);
 }
 
+async function insertVarcharArray(knex) {
+  const tableName = `common_test_${counter}`;
+  counter += 1;
+
+  await knex.schema.createTable(tableName, (table) => {
+    table.increments();
+    table.specificType('value', 'varchar ARRAY');
+  });
+
+  await knex.table(tableName).insert({ value: '{test}' });
+
+  const [row] = await knex.select().from(tableName);
+
+  expect(row.value).to.deep.equal(['test']);
+}
+
 module.exports = {
   createATestTable,
   deleteARowReturnsTheNumberOfRecords,
@@ -514,6 +530,7 @@ module.exports = {
   insertRowWithJsonbAndReturnAnArrayOfRows,
   insertRowWithTimestampAsNull,
   insertTextArray,
+  insertVarcharArray,
   insertTwoRowsInTransaction,
   queryForASingleField,
   queryForFirst,

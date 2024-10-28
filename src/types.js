@@ -16,6 +16,7 @@ function applyRecord(columnMetadata, record) {
           parsedColumns[column.name] = JSON.parse(record[column.name]);
           break;
         case '_text':
+        case '_varchar':
           parsedColumns[column.name] = record[column.name].stringValues;
           break;
         default:
