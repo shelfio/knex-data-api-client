@@ -1,12 +1,12 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-param-reassign */
-/* eslint-disable global-require */
+ 
+ 
+ 
 
 const { timeout, KnexTimeoutError } = require('knex/lib/util/timeout');
 const Transaction = require('knex/lib/execution/transaction');
 
 module.exports = class DataAPITransaction extends Transaction {
-  // eslint-disable-next-line class-methods-use-this
+   
   begin(connection) {
     return connection.beginTransaction().then((result) => {
       connection.__knexTxId = result.transactionId;
@@ -17,7 +17,7 @@ module.exports = class DataAPITransaction extends Transaction {
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
+   
   async commit(connection, value) {
     if (connection.isTransaction && connection.rdsTransactionId) {
       this._completed = true;
@@ -39,7 +39,7 @@ module.exports = class DataAPITransaction extends Transaction {
     this._resolver(value);
   }
 
-  // eslint-disable-next-line class-methods-use-this
+   
   async rollback(connection, err) {
     this._completed = true;
     if (connection.isTransaction && connection.rdsTransactionId) {

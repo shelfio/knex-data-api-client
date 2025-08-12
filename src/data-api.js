@@ -1,5 +1,5 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-param-reassign */
+ 
+ 
 
 const dataApiClient = require('data-api-client');
 const util = require('util');
@@ -96,7 +96,7 @@ function dataAPI(ClientRDSDataAPI, Client, dialect) {
       const rows = obj.response.records;
       const fields = rows && rows[0] ? Object.keys(rows[0]) : [];
 
-      // eslint-disable-next-line consistent-return
+       
       if (obj.output) {
         if (dialect === 'mysql') {
           return obj.output.call(runner, rows, fields);
@@ -178,7 +178,7 @@ function dataAPI(ClientRDSDataAPI, Client, dialect) {
         obj.response = obj.response.records;
       }
 
-      // eslint-disable-next-line consistent-return
+       
       return obj.response;
     },
   });
