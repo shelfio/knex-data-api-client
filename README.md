@@ -53,7 +53,7 @@ const knex = require('knex')({
 Note - this significantly increases the data required back from the RDS data api.
 
 ```javascript
-knex().doSomething().options({ nestTables: true });
+knex().doSomething().options({nestTables: true});
 ```
 
 ## Credits

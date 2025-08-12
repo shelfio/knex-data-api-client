@@ -39,10 +39,12 @@
   "peerDependencies": {
     "knex": "^2.1.0"
   },
+  "prettier": "@shelf/prettier-config",
   "devDependencies": {
     "@aws-cdk/aws-rds": "^1.161.0",
     "@aws-cdk/core": "^1.161.0",
     "@eslint/js": "9.33.0",
+    "@shelf/prettier-config": "1.0.0",
     "aws-sdk": "^2.1161.0",
     "chai": "4.3.6",
     "dotenv": "16.0.1",
@@ -53,6 +55,6 @@
     "mocha": "10.0.0",
     "mysql": "2.18.1",
     "pg": "8.7.3",
-    "prettier": "2.7.1"
+    "prettier": "3.6.2"
   }
 }
