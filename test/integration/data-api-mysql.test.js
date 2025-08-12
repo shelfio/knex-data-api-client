@@ -1,9 +1,9 @@
-const { expect } = require('chai');
-const { describe, it, before } = require('mocha');
+const {expect} = require('chai');
+const {describe, it, before} = require('mocha');
 
-const { mysql } = require('./knexClient');
+const {mysql} = require('./knexClient');
 const commonTests = require('./common-tests');
-const { migrateToLatest } = require('./migrations-test');
+const {migrateToLatest} = require('./migrations-test');
 
 let counter = 0;
 
@@ -12,9 +12,9 @@ describe('data-api-mysql', () => {
     const tables = await mysql
       .select('table_name')
       .from('information_schema.tables')
-      .where({ TABLE_SCHEMA: process.env.DB_NAME });
+      .where({TABLE_SCHEMA: process.env.DB_NAME});
 
-    const tableNames = tables.map((table) => table.table_name);
+    const tableNames = tables.map(table => table.table_name);
     await mysql.raw('SET FOREIGN_KEY_CHECKS = 0;');
 
     for (let i = 0; i < tableNames.length; i += 1) {
@@ -37,12 +37,12 @@ describe('data-api-mysql', () => {
       const tableName = `test_${counter}`;
       counter += 1;
 
-      await mysql.schema.createTable(tableName, (table) => {
+      await mysql.schema.createTable(tableName, table => {
         table.increments();
         table.string('value');
       });
 
-      const actual = await mysql.table(tableName).insert({ value: 'test' }).returning('*');
+      const actual = await mysql.table(tableName).insert({value: 'test'}).returning('*');
 
       // This works differently in mysql compared to postgres. Mysql only returns the id
       expect(actual.length).to.equal(1);
@@ -99,13 +99,13 @@ describe('data-api-mysql', () => {
       const tableName = `test_${counter}`;
       counter += 1;
 
-      await mysql.schema.createTable(tableName, (table) => {
+      await mysql.schema.createTable(tableName, table => {
         table.increments();
         table.string('value');
       });
 
       try {
-        await mysql.table(tableName).insert({ non_existing_colun: 'test' }).returning('*');
+        await mysql.table(tableName).insert({non_existing_colun: 'test'}).returning('*');
         throw new Error('Should throw an error');
       } catch (err) {
         expect(err.message).to.contain('Unknown column');

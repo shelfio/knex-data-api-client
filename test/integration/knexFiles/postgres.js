@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk');
+
 AWS.config.update({
-  credentials: new AWS.SharedIniFileCredentials({ profile: process.env.AWS_PROFILE }),
+  credentials: new AWS.SharedIniFileCredentials({profile: process.env.AWS_PROFILE}),
 });
 
 require('dotenv').config();

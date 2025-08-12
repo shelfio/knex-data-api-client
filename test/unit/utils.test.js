@@ -1,4 +1,4 @@
-const { expect } = require('chai');
+const {expect} = require('chai');
 const utils = require('../../src/utils');
 
 describe('utils', () => {

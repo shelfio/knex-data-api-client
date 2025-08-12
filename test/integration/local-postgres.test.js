@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { describe, it, before } = require('mocha');
+const {describe, it, before} = require('mocha');
 
 const postgres = require('knex')({
   client: 'pg',
@@ -7,17 +7,17 @@ const postgres = require('knex')({
 });
 
 const commonTests = require('./common-tests');
-const { migrateToLatest } = require('./migrations-test');
+const {migrateToLatest} = require('./migrations-test');
 
 describe('postgres', () => {
   before(async () => {
     const tables = await postgres
       .select('table_name')
       .from('information_schema.tables')
-      .where({ table_schema: 'public' })
+      .where({table_schema: 'public'})
       .orderBy('table_name', 'desc');
 
-    const tableNames = tables.map((table) => table.table_name);
+    const tableNames = tables.map(table => table.table_name);
 
     for (let i = 0; i < tableNames.length; i += 1) {
       const tableName = tableNames[i];

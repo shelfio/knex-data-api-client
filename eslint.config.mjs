@@ -1,12 +1,16 @@
 import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
+import prettierPlugin from 'eslint-plugin-prettier';
+import prettierConfig from 'eslint-config-prettier';
 
 export default [
   js.configs.recommended,
+  prettierConfig,
   {
     files: ['**/*.js'],
     plugins: {
       import: importPlugin,
+      prettier: prettierPlugin,
     },
     rules: {
       'no-use-before-define': [
@@ -15,8 +19,6 @@ export default [
           functions: false,
         },
       ],
-      'comma-dangle': ['error', 'always-multiline'],
-      'arrow-parens': 'off',
       'import/no-unresolved': 'error',
       'import/named': 'error',
       'import/default': 'error',
@@ -28,6 +30,7 @@ export default [
       'import/no-useless-path-segments': 'error',
       'import/newline-after-import': 'error',
       'import/no-duplicates': 'error',
+      'prettier/prettier': 'error',
     },
     languageOptions: {
       ecmaVersion: 2022,

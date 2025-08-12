@@ -1,6 +1,3 @@
- 
- 
-
 const dataApiClient = require('data-api-client');
 const util = require('util');
 const Bluebird = require('bluebird');
@@ -42,7 +39,7 @@ function dataAPI(ClientRDSDataAPI, Client, dialect) {
     // Runs the query on the specified connection, providing the bindings
     // and any other necessary prep work.
     _query(connection, obj) {
-      if (!obj || typeof obj === 'string') obj = { sql: obj };
+      if (!obj || typeof obj === 'string') obj = {sql: obj};
 
       return new Bluebird((resolve, reject) => {
         if (!obj.sql) {
@@ -68,12 +65,12 @@ function dataAPI(ClientRDSDataAPI, Client, dialect) {
 
         connection
           .query(query)
-          .then((response) => {
+          .then(response => {
             response.rows = response.records;
             obj.response = response;
             resolve(obj);
           })
-          .catch((err) => {
+          .catch(err => {
             if (
               typeof err !== 'undefined' &&
               typeof err.message === 'string' &&
@@ -96,7 +93,6 @@ function dataAPI(ClientRDSDataAPI, Client, dialect) {
       const rows = obj.response.records;
       const fields = rows && rows[0] ? Object.keys(rows[0]) : [];
 
-       
       if (obj.output) {
         if (dialect === 'mysql') {
           return obj.output.call(runner, rows, fields);
@@ -125,12 +121,12 @@ function dataAPI(ClientRDSDataAPI, Client, dialect) {
         // Else if nested tables
         else {
           const res = [];
-          const { records, columnMetadata } = obj.response;
+          const {records, columnMetadata} = obj.response;
 
           // Iterate through the data
           for (let i = 0; i < columnMetadata.length; i += 1) {
-            const { tableName } = columnMetadata[i];
-            const { label } = columnMetadata[i];
+            const {tableName} = columnMetadata[i];
+            const {label} = columnMetadata[i];
 
             // Iterate through responses
             for (let j = 0; j < records.length; j += 1) {
@@ -178,7 +174,6 @@ function dataAPI(ClientRDSDataAPI, Client, dialect) {
         obj.response = obj.response.records;
       }
 
-       
       return obj.response;
     },
   });

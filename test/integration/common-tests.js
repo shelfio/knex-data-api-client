@@ -1,4 +1,4 @@
-const { expect } = require('chai');
+const {expect} = require('chai');
 
 let counter = 0;
 
@@ -15,14 +15,14 @@ async function deleteARowReturnsTheNumberOfRecords(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
 
-  await knex.table(tableName).insert({ value: 'test' });
+  await knex.table(tableName).insert({value: 'test'});
 
-  const updatedRows = await knex(tableName).where({ value: 'test' }).del();
+  const updatedRows = await knex(tableName).where({value: 'test'}).del();
 
   expect(updatedRows).to.equal(1);
 }
@@ -31,7 +31,7 @@ async function hasTableReturnsTrue(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
@@ -45,7 +45,7 @@ async function createATestTable(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('name');
     table.integer('batch');
@@ -55,7 +55,7 @@ async function createATestTable(knex) {
   const rows = await knex
     .select('table_name')
     .from('information_schema.tables')
-    .where({ table_name: tableName });
+    .where({table_name: tableName});
 
   expect(rows.length).to.equal(1);
 }
@@ -64,12 +64,12 @@ async function queryForASingleField(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
 
-  await knex.table(tableName).insert({ value: 'test' });
+  await knex.table(tableName).insert({value: 'test'});
 
   const rows = await knex.select('value').from(tableName);
 
@@ -81,12 +81,12 @@ async function queryForFirst(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
 
-  await knex.table(tableName).insert({ value: 'test' });
+  await knex.table(tableName).insert({value: 'test'});
 
   const row = await knex.first('value').from(tableName);
   expect(row).to.be.an('object');
@@ -97,7 +97,7 @@ async function queryForFirstUndefined(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
@@ -110,14 +110,14 @@ async function queryForATimestampField(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.timestamp('date');
   });
 
   const date = new Date('2021-10-06T07:13:40.917Z');
 
-  await knex.table(tableName).insert({ date });
+  await knex.table(tableName).insert({date});
 
   const rows = await knex.select('date').from(tableName);
 
@@ -131,7 +131,7 @@ async function queryForATruncatedTimestampField(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.timestamp('date');
   });
@@ -139,7 +139,7 @@ async function queryForATruncatedTimestampField(knex) {
   // It is saved correctly in DB, but SQL command select will retrieve as : 2021-10-07 12:56:16.18
   const date = new Date('2021-10-07T12:56:16.180Z');
 
-  await knex.table(tableName).insert({ date });
+  await knex.table(tableName).insert({date});
 
   const rows = await knex.select('date').from(tableName);
 
@@ -156,15 +156,15 @@ async function queryForAInfinityTimestampField(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.timestamp('date');
   });
 
-  await knex.table(tableName).insert({ date: Infinity });
-  await knex.table(tableName).insert({ date: -Infinity });
-  await knex.table(tableName).insert({ date: 'infinity' });
-  await knex.table(tableName).insert({ date: '-infinity' });
+  await knex.table(tableName).insert({date: Infinity});
+  await knex.table(tableName).insert({date: -Infinity});
+  await knex.table(tableName).insert({date: 'infinity'});
+  await knex.table(tableName).insert({date: '-infinity'});
 
   const rows = await knex.select('date').from(tableName);
 
@@ -180,12 +180,12 @@ async function queryForASingleJSONField(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.json('value');
   });
 
-  await knex.table(tableName).insert({ value: { foo: 'bar' } });
+  await knex.table(tableName).insert({value: {foo: 'bar'}});
 
   const rows = await knex.select('value').from(tableName);
 
@@ -197,12 +197,12 @@ async function queryForASingleJSONBField(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.jsonb('value');
   });
 
-  await knex.table(tableName).insert({ value: { foo: 'bar' } });
+  await knex.table(tableName).insert({value: {foo: 'bar'}});
 
   const rows = await knex.select('value').from(tableName);
 
@@ -214,13 +214,13 @@ async function queryForAJSONArrayField(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.json('value');
   });
 
   // Need to stringify.. http://knexjs.org/#Schema-json
-  await knex.table(tableName).insert({ value: JSON.stringify(['bar']) });
+  await knex.table(tableName).insert({value: JSON.stringify(['bar'])});
 
   const rows = await knex.select('value').from(tableName);
 
@@ -234,12 +234,12 @@ async function queryTwoTablesWithAnInnerJoin(knex) {
   const tableName2 = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName1, (table) => {
+  await knex.schema.createTable(tableName1, table => {
     table.increments();
     table.string('value1');
   });
 
-  await knex.schema.createTable(tableName2, (table) => {
+  await knex.schema.createTable(tableName2, table => {
     table.increments();
     table.integer('table1_id').unsigned();
     table.string('value2');
@@ -247,10 +247,10 @@ async function queryTwoTablesWithAnInnerJoin(knex) {
     table.foreign('table1_id').references('id').inTable(tableName1);
   });
 
-  await knex.table(tableName1).insert({ value1: 'test1' }).returning('*');
+  await knex.table(tableName1).insert({value1: 'test1'}).returning('*');
 
   // Mysql doesn't return the id of the created entity
-  await knex.table(tableName2).insert({ value2: 'test2', table1_id: 1 });
+  await knex.table(tableName2).insert({value2: 'test2', table1_id: 1});
 
   const rows = await knex
     .select()
@@ -265,13 +265,13 @@ async function returnAnErrorForInvalidInsert(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
 
   try {
-    await knex.table(tableName).insert({ non_existing_colun: 'test' }).returning('*');
+    await knex.table(tableName).insert({non_existing_colun: 'test'}).returning('*');
     throw new Error('should throw');
   } catch (err) {
     expect(err.message).to.contain('column "non_existing_colun" of');
@@ -291,13 +291,13 @@ async function fetchToRowsUsingWhereIn(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
 
-  await knex.table(tableName).insert({ value: 'test1' });
-  await knex.table(tableName).insert({ value: 'test2' });
+  await knex.table(tableName).insert({value: 'test1'});
+  await knex.table(tableName).insert({value: 'test2'});
 
   const rows = await knex.select().from(tableName).whereIn('value', ['test1', 'test2']);
 
@@ -308,14 +308,14 @@ async function fetchToRowsUsingWhereInWithNumbers(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.integer('value');
   });
 
-  await knex.table(tableName).insert({ value: 1 });
-  await knex.table(tableName).insert({ value: 2 });
-  await knex.table(tableName).insert({ value: 3 });
+  await knex.table(tableName).insert({value: 1});
+  await knex.table(tableName).insert({value: 2});
+  await knex.table(tableName).insert({value: 3});
 
   const rows = await knex.select().from(tableName).whereIn('value', [1, 2]);
 
@@ -326,12 +326,12 @@ async function insertRowAndFetch(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
 
-  await knex.table(tableName).insert({ value: 'test' });
+  await knex.table(tableName).insert({value: 'test'});
 
   const rows = await knex.select().from(tableName);
 
@@ -342,43 +342,43 @@ async function insertRowWithJsonbAndReturnAnArrayOfRows(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.jsonb('payload');
   });
 
-  const payload = { name: 'moi', location: 'sydney' };
-  const rows = await knex.table(tableName).insert({ payload }).returning('*');
+  const payload = {name: 'moi', location: 'sydney'};
+  const rows = await knex.table(tableName).insert({payload}).returning('*');
 
   expect(rows.length).to.equal(1);
-  expect(rows[0]).to.deep.equal({ id: 1, payload });
+  expect(rows[0]).to.deep.equal({id: 1, payload});
 }
 
 async function insertRowAndReturnAnArrayOfRows(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
 
-  const rows = await knex.table(tableName).insert({ value: 'test' }).returning('id');
+  const rows = await knex.table(tableName).insert({value: 'test'}).returning('id');
 
   expect(rows.length).to.equal(1);
-  expect(rows[0]).to.deep.equal({ id: 1 });
+  expect(rows[0]).to.deep.equal({id: 1});
 }
 
 async function insertRowWithTimestampAsNull(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.timestamp('value');
   });
 
-  const response = await knex.table(tableName).insert({ value: null }).returning('*');
+  const response = await knex.table(tableName).insert({value: null}).returning('*');
 
   expect(response.length).to.equal(1);
 }
@@ -387,21 +387,21 @@ async function insertTwoRowsInTransaction(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
 
   try {
     await knex
-      .transaction(async (trx) => {
-        await trx.table(tableName).insert({ value: 'Test1' });
-        await trx.table(tableName).insert({ value: 'Test2' });
+      .transaction(async trx => {
+        await trx.table(tableName).insert({value: 'Test1'});
+        await trx.table(tableName).insert({value: 'Test2'});
       })
       .then(() => {
         console.log('Transaction complete.');
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       });
   } catch (err) {
@@ -417,14 +417,14 @@ async function updateARow(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
 
-  await knex.table(tableName).insert({ value: 'test' });
+  await knex.table(tableName).insert({value: 'test'});
 
-  const updatedRows = await knex(tableName).update({ value: 'update' }).where({ value: 'test' });
+  const updatedRows = await knex(tableName).update({value: 'update'}).where({value: 'test'});
 
   const rows = await knex.select('value').from(tableName);
 
@@ -437,16 +437,16 @@ async function updateARowReturning(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
 
-  await knex.table(tableName).insert({ value: 'test' });
+  await knex.table(tableName).insert({value: 'test'});
 
   const rows = await knex(tableName)
-    .update({ value: 'update' })
-    .where({ value: 'test' })
+    .update({value: 'update'})
+    .where({value: 'test'})
     .returning('*');
 
   expect(rows.length).to.equal(1);
@@ -457,27 +457,27 @@ async function updateRowWithJsonbReturning(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.jsonb('value');
   });
 
-  await knex.table(tableName).insert({ value: { test: 'one' } });
+  await knex.table(tableName).insert({value: {test: 'one'}});
 
   const rows = await knex(tableName)
-    .update({ value: { test: 'update' } })
+    .update({value: {test: 'update'}})
     .returning('*');
 
   expect(rows.length).to.equal(1);
   expect(typeof rows[0].value).to.equal('object');
-  expect(rows[0].value).to.deep.equal({ test: 'update' });
+  expect(rows[0].value).to.deep.equal({test: 'update'});
 }
 
 async function returnEmptyArrayForQueryOnEmptyTable(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.string('value');
   });
@@ -490,12 +490,12 @@ async function insertTextArray(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.specificType('value', 'text ARRAY');
   });
 
-  await knex.table(tableName).insert({ value: '{test}' });
+  await knex.table(tableName).insert({value: '{test}'});
 
   const [row] = await knex.select().from(tableName);
 
@@ -506,12 +506,12 @@ async function insertVarcharArray(knex) {
   const tableName = `common_test_${counter}`;
   counter += 1;
 
-  await knex.schema.createTable(tableName, (table) => {
+  await knex.schema.createTable(tableName, table => {
     table.increments();
     table.specificType('value', 'varchar ARRAY');
   });
 
-  await knex.table(tableName).insert({ value: '{test}' });
+  await knex.table(tableName).insert({value: '{test}'});
 
   const [row] = await knex.select().from(tableName);
 

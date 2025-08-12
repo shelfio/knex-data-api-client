@@ -1,9 +1,9 @@
-const { parseTimestamp } = require('./utils');
+const {parseTimestamp} = require('./utils');
 
 function applyRecord(columnMetadata, record) {
   const parsedColumns = {};
 
-  columnMetadata.forEach((column) => {
+  columnMetadata.forEach(column => {
     // Skip null values
     if (record[column.name]) {
       switch (column.typeName) {
@@ -32,8 +32,8 @@ function applyRecord(columnMetadata, record) {
   };
 }
 
-function apply({ columnMetadata, records }) {
-  return records.map((record) => applyRecord(columnMetadata, record));
+function apply({columnMetadata, records}) {
+  return records.map(record => applyRecord(columnMetadata, record));
 }
 
 module.exports = {

@@ -15,10 +15,10 @@ class RdsStack extends cdk.Stack {
     const vpc = new ec2.Vpc(this, 'TestVpc', {
       cidr: '10.0.0.0/16',
       natGateways: 0,
-      subnetConfiguration: [{ name: 'test_aurora_isolated_', subnetType: ec2.SubnetType.ISOLATED }],
+      subnetConfiguration: [{name: 'test_aurora_isolated_', subnetType: ec2.SubnetType.ISOLATED}],
     });
 
-    const subnetIds = vpc.isolatedSubnets.map((subnet) => subnet.subnetId);
+    const subnetIds = vpc.isolatedSubnets.map(subnet => subnet.subnetId);
 
     const dbSubnetGroup = new rds.CfnDBSubnetGroup(this, 'TestAuroraSubnetGroup', {
       dbSubnetGroupDescription: 'Subnet group to access aurora',
@@ -71,4 +71,4 @@ class RdsStack extends cdk.Stack {
   }
 }
 
-module.exports = { RdsStack };
+module.exports = {RdsStack};

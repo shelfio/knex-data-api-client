@@ -1,8 +1,8 @@
-const { describe, it, before } = require('mocha');
+const {describe, it, before} = require('mocha');
 
-const { postgres } = require('./knexClient');
+const {postgres} = require('./knexClient');
 const commonTests = require('./common-tests');
-const { migrateToLatest } = require('./migrations-test');
+const {migrateToLatest} = require('./migrations-test');
 
 // test('Connection', async () => {
 //   const test = await knex.raw('select 1+1 as result');
@@ -17,9 +17,9 @@ describe('data-api-postgres', () => {
     const tables = await postgres
       .select('table_name')
       .from('information_schema.tables')
-      .where({ table_schema: 'public' });
+      .where({table_schema: 'public'});
 
-    const tableNames = tables.map((table) => table.table_name);
+    const tableNames = tables.map(table => table.table_name);
 
     for (let i = 0; i < tableNames.length; i += 1) {
       const tableName = tableNames[tableNames.length - i - 1];

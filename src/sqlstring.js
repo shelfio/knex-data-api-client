@@ -1,10 +1,10 @@
 const knexClientFactory = require('knex');
 
 function format(sql, bindings, dialect) {
-  const knexClient = knexClientFactory({ client: dialect });
+  const knexClient = knexClientFactory({client: dialect});
 
   const stringBindings = bindings
-    ? bindings.map((binding) => {
+    ? bindings.map(binding => {
         if (!binding) {
           return binding;
         }
@@ -45,7 +45,7 @@ function format(sql, bindings, dialect) {
         }
         return match;
       }),
-      stringBindings,
+      stringBindings
     )
     .toString();
 }
