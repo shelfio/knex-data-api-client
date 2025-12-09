@@ -15,10 +15,12 @@ function applyRecord(columnMetadata, record) {
         case 'jsonb':
           parsedColumns[column.name] = JSON.parse(record[column.name]);
           break;
+        /* Commented out since data-api-client v2.0.0 handles these types natively  
         case '_text':
         case '_varchar':
           parsedColumns[column.name] = record[column.name].stringValues;
           break;
+        */
         default:
           // Skip
           break;
