@@ -1,6 +1,6 @@
 {
   "name": "@shelf/knex-aurora-data-api-client",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Knex Aurora Data API Client",
   "main": "index.js",
   "files": [
