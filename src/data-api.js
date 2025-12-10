@@ -16,8 +16,11 @@ function dataAPI(ClientRDSDataAPI, Client, dialect) {
     driverName: 'rds-data',
 
     _driver() {
-      // Setup dataApiClient
-      return dataApiClient(this.config.connection);
+      // Setup dataApiClient with caching
+      if (!this._cachedClient) {
+        this._cachedClient = dataApiClient(this.config.connection);
+      }
+      return this._cachedClient;
     },
 
     transaction(...args) {
@@ -32,6 +35,8 @@ function dataAPI(ClientRDSDataAPI, Client, dialect) {
 
     // Destroy - no connection pool to tear down, so just resolve
     destroy() {
+      // Clear the cached client
+      this._cachedClient = null;
       // return Bluebird.resolve();
       return Promise.resolve();
     },
