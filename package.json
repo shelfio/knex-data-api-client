@@ -1,7 +1,7 @@
 {
-  "name": "@shelf/knex-aurora-data-api-client",
-  "version": "2.4.0",
-  "description": "Knex Aurora Data API Client",
+  "name": "knex-rds-proxy-client",
+  "version": "1.0.0",
+  "description": "Knex RDS Proxy Client",
   "main": "index.js",
   "files": [
     "src/**/*.js"
@@ -14,24 +14,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/markusahlstrand/knex-data-api-client.git"
+    "url": "git+https://github.com/Maksym-Haiovets/knex-rds-proxy-client.git"
   },
   "keywords": [
     "knex",
-    "data",
-    "api",
     "rds",
-    "aurora",
-    "serverless",
+    "proxy",
+    "iam",
+    "auth",
     "mysql",
     "postgres"
   ],
   "author": "Markus Ahlstrand",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/markusahlstrand/knex-aurora-data-api-client/issues"
+    "url": "https://github.com/Maksym-Haiovets/knex-rds-proxy-client/issues"
   },
-  "homepage": "https://github.com/markusahlstrand/knex-data-api-client#readme",
+  "homepage": "https://github.com/Maksym-Haiovets/knex-rds-proxy-client#readme",
   "dependencies": {
     "bluebird": "3.7.2",
     "data-api-client": "2.1.3"

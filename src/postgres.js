@@ -1,14 +1,14 @@
 const PostgresClient = require('knex/lib/dialects/postgres');
-const dataApi = require('./data-api');
+const rdsProxy = require('./rds-proxy-client');
 const constants = require('./constants');
 
 // Call postgres client to setup knex, this set as this function
 const client = PostgresClient.constructor
-  ? class PostgresClientRDSDataAPI extends PostgresClient {}
-  : function PostgresClientRDSDataAPI(config) {
-      PostgresClientRDSDataAPI.call(this, config);
+  ? class PostgresClientRDSProxyIam extends PostgresClient {}
+  : function PostgresClientRDSProxy(config) {
+      PostgresClientRDSProxy.call(this, config);
     };
 
-dataApi(client, PostgresClient, constants.dialects.postgres);
+rdsProxy(client, PostgresClient, constants.dialects.postgres);
 
 module.exports = client;
