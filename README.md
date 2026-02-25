@@ -1,59 +1,51 @@
-# knex-aurora-data-api-client
+# knex-rds-proxy-client
 
-Knex Aurora Data API Client
+Knex RDS Proxy Client
 
-[![npm](https://img.shields.io/npm/v/knex-aurora-data-api-client.svg)](https://www.npmjs.com/package/knex-aurora-data-api-client)
-[![npm](https://img.shields.io/npm/l/knex-aurora-data-api-client.svg)](https://www.npmjs.com/package/knex-aurora-data-api-client)
+[![npm](https://img.shields.io/npm/v/knex-rds-proxy-client.svg)](https://www.npmjs.com/package/knex-rds-proxy-client)
+[![npm](https://img.shields.io/npm/l/knex-rds-proxy-client.svg)](https://www.npmjs.com/package/knex-rds-proxy-client)
 
-This is a fork of the knex-data-api-client by @alan-cooney to support both Postgres and Mysql
+This is a fork of the knex-data-api-client by @alan-cooney, adapted for AWS RDS Proxy IAM authentication.
 
-The **Knex Aurora Data API Client** is a Knex extension that supports the RDS Data API, built using [Jeremy Daily's](https://twitter.com/jeremy_daly) excellent [data-api-client](https://www.npmjs.com/package/data-api-client) module.
-
-Support for transactions, and nestTables is included.
+The **Knex RDS Proxy Client** is a Knex extension that refreshes IAM auth tokens for AWS RDS Proxy connections in Postgres and MySQL.
 
 ## Configuration
 
-The library uses the default AWS credentials to connect to the RDS database using the data-api.
-The [data-api-client](https://www.npmjs.com/package/data-api-client) that this library is a using provides more documentation on the permissions required and how to enable the data-api for the database.
+The library uses AWS credentials to generate IAM auth tokens for RDS Proxy. Set `AWS_REGION` or `AWS_DEFAULT_REGION`, and provide IAM credentials via the default AWS SDK chain or the `iamAuth.credentials` option.
+Tokens are cached for `iamTokenTtlMs` (default 10 minutes).
 
 ## Use
 
-To use aurora in mysql mode:
+To use RDS Proxy in MySQL mode:
 
 ```javascript
-const knexDataApiClient = require('knex-aurora-data-api-client');
+const knexRdsProxyClient = require('knex-rds-proxy-client');
 const knex = require('knex')({
-  client: knexDataApiClient.mysql,
+  client: knexRdsProxyClient.mysql,
   connection: {
-    secretArn: 'secret-arn', // Required
-    resourceArn: 'db-resource-arn', // Required
+    host: 'proxy-endpoint',
+    port: 3306,
+    user: 'db-user',
     database: 'db-name',
-    region: 'eu-west-2',
+    iamTokenTtlMs: 10 * 60 * 1000,
   },
 });
 ```
 
-To use aurora in postgres mode:
+To use RDS Proxy in Postgres mode:
 
 ```javascript
-const knexDataApiClient = require('knex-aurora-data-api-client');
+const knexRdsProxyClient = require('knex-rds-proxy-client');
 const knex = require('knex')({
-  client: knexDataApiClient.postgres,
+  client: knexRdsProxyClient.postgres,
   connection: {
-    secretArn: 'secret-arn', // Required
-    resourceArn: 'db-resource-arn', // Required
+    host: 'proxy-endpoint',
+    port: 5432,
+    user: 'db-user',
     database: 'db-name',
-    region: 'eu-west-2',
+    iamTokenTtlMs: 10 * 60 * 1000,
   },
 });
-```
-
-### Nested tables support
-
-Note - this significantly increases the data required back from the RDS data api.
-
-```javascript
-knex().doSomething().options({nestTables: true});
 ```
 
 ## Credits

@@ -54,28 +54,14 @@ function rdsProxy(ClientrdsProxy, Client) {
       }
 
       const connectionSettings = this.connectionSettings || {};
-      const iamAuth = connectionSettings.iamAuth || this.config.iamAuth;
 
       this._iamAuthResolved = true;
 
-      if (!iamAuth) {
-        return undefined;
-      }
+      const host = connectionSettings.host;
+      const port = connectionSettings.port;
+      const username = connectionSettings.user;
 
-      const host = iamAuth.host || connectionSettings.host;
-      const port = iamAuth.port || connectionSettings.port;
-      const username = iamAuth.username || connectionSettings.user;
-
-      if (!host || !port || !username) {
-        throw new Error('RDS IAM auth requires host, port, and username');
-      }
-
-      this._iamAuthConfig = {
-        ...iamAuth,
-        host,
-        port,
-        username,
-      };
+      this._iamAuthConfig = {host, port, username};
 
       const ttl = connectionSettings.iamTokenTtlMs || this.config.iamTokenTtlMs;
       this._iamTokenTtlMs = typeof ttl === 'number' && ttl > 0 ? ttl : DEFAULT_IAM_TOKEN_TTL_MS;
