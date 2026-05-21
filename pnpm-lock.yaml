@@ -5,6 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  lodash: 4.18.1
   serialize-javascript: 7.0.5
 
 importers:
@@ -52,11 +53,11 @@ importers:
         specifier: 5.5.4
         version: 5.5.4(eslint-config-prettier@10.1.8(eslint@9.33.0))(eslint@9.33.0)(prettier@3.6.2)
       knex:
-        specifier: ^3.1.0
-        version: 3.1.0(mysql@2.18.1)(pg@8.7.3)
+        specifier: ^3.2.10
+        version: 3.2.10(mysql@2.18.1)(pg@8.7.3)
       knex-migrate:
         specifier: 1.7.4
-        version: 1.7.4(knex@3.1.0(mysql@2.18.1)(pg@8.7.3))
+        version: 1.7.4(knex@3.2.10(mysql@2.18.1)(pg@8.7.3))
       mocha:
         specifier: 10.0.0
         version: 10.0.0
@@ -1609,8 +1610,8 @@ packages:
     peerDependencies:
       knex: '*'
 
-  knex@3.1.0:
-    resolution: {integrity: sha512-GLoII6hR0c4ti243gMs5/1Rb3B+AjwMOfjYm97pu0FOQa7JH56hgBxYf5WK2525ceSbBY1cjeZ9yk99GPMB6Kw==}
+  knex@3.2.10:
+    resolution: {integrity: sha512-oypTHfrc9i72iyxaUQBKHOxhcr0xM65MPf6FpN02nimsftXwzXprIkLjfXdubvhbu4PMWLp023q8o8CYvHSuZw==}
     engines: {node: '>=16'}
     hasBin: true
     peerDependencies:
@@ -1619,6 +1620,7 @@ packages:
       mysql2: '*'
       pg: '*'
       pg-native: '*'
+      pg-query-stream: ^4.14.0
       sqlite3: '*'
       tedious: '*'
     peerDependenciesMeta:
@@ -1631,6 +1633,8 @@ packages:
       pg:
         optional: true
       pg-native:
+        optional: true
+      pg-query-stream:
         optional: true
       sqlite3:
         optional: true
@@ -1648,8 +1652,8 @@ packages:
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
-  lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   log-symbols@4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
@@ -3999,19 +4003,19 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  knex-migrate@1.7.4(knex@3.1.0(mysql@2.18.1)(pg@8.7.3)):
+  knex-migrate@1.7.4(knex@3.2.10(mysql@2.18.1)(pg@8.7.3)):
     dependencies:
       bluebird: 3.7.2
       invariant: 2.2.4
-      knex: 3.1.0(mysql@2.18.1)(pg@8.7.3)
-      lodash: 4.17.21
+      knex: 3.2.10(mysql@2.18.1)(pg@8.7.3)
+      lodash: 4.18.1
       minimist: 1.2.8
       mkdirp: 0.5.6
       prettyjson: 1.2.5
       req-from: 1.0.1
       umzug: 2.3.0
 
-  knex@3.1.0(mysql@2.18.1)(pg@8.7.3):
+  knex@3.2.10(mysql@2.18.1)(pg@8.7.3):
     dependencies:
       colorette: 2.0.19
       commander: 10.0.1
@@ -4021,7 +4025,7 @@ snapshots:
       get-package-type: 0.1.0
       getopts: 2.3.0
       interpret: 2.2.0
-      lodash: 4.17.21
+      lodash: 4.18.1
       pg-connection-string: 2.6.2
       rechoir: 0.8.0
       resolve-from: 5.0.0
@@ -4044,7 +4048,7 @@ snapshots:
 
   lodash.merge@4.6.2: {}
 
-  lodash@4.17.21: {}
+  lodash@4.18.1: {}
 
   log-symbols@4.1.0:
     dependencies:
